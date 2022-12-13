@@ -1,20 +1,22 @@
 import './App.css';
-import React from "react";
 import Header from './components/Header'
 import HomeScreen from './Screens/HomeScreen';
 import SignInScreen from './Screens/SignInScreen'
 import SignUpScreen from './Screens/SignuUpScreen'
+import UtilToast from './components/UtilToast';
 import {
   BrowserRouter as Router,
   Routes,
   Route
 } from "react-router-dom";
 import { Container } from 'react-bootstrap';
+import { UserProvider, useUser } from './context/UserContext';
 
 
 function App() {
+
   return (
-    <div>
+    <UserProvider>
       <Router>
         <Header />
         <main>
@@ -26,9 +28,9 @@ function App() {
             </Routes>
           </Container>
         </main>
+        <UtilToast />
       </Router>
-
-    </div>
+    </UserProvider>
   );
 }
 

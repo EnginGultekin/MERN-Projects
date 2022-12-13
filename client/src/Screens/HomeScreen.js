@@ -1,8 +1,12 @@
-import React from 'react'
+import { useEffect } from 'react';
+import { useUser } from '../context/UserContext'
 
 function HomeScreen() {
+
+  const { user } = useUser();
+
   return (
-    <div>HomeScreen</div>
+    <div className='mt-5'>{user?.email ?? 'Kullanıcı Yok '}</div>
   )
 }
 
