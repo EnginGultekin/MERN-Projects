@@ -10,7 +10,7 @@ import {
   Route
 } from "react-router-dom";
 import { Container } from 'react-bootstrap';
-import { UserProvider, useUser } from './context/UserContext';
+import { UserProvider } from './context/UserContext';
 
 
 function App() {

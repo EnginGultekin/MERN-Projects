@@ -16,7 +16,7 @@ const Header = () => {
         if (localStorage.getItem('user') && !user) {
             setUser(JSON.parse(localStorage.getItem('user')))
         }
-    }, [user])
+    }, [user, setUser])
 
     return <Navbar bg="primary" expand="lg">
         <Container>
