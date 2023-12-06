@@ -1,5 +1,5 @@
 import expressRedisCache from 'express-redis-cache';
-import redis from './config/redis';
+import redis from '../config/redis';
 
 const cache = expressRedisCache({
     clien: redis,

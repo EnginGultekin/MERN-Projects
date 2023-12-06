@@ -3,7 +3,7 @@ import './config/db.js';
 import express from 'express';
 import Boom from '@hapi/boom';
 import cors from 'cors';
-import limiter from './rate-limiter.js';
+import limiter from './middlewares/rate-limiter.js';
 
 const app = express();
 

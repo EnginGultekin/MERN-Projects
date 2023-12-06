@@ -1,6 +1,6 @@
 import { rateLimit } from 'express-rate-limit';
 import { RedisStore } from 'rate-limit-redis';
-import redis from './config/redis.js';
+import redis from '../config/redis.js';
 import Boom from '@hapi/boom';
 
 // Bu sayfa istek atma sıklığını kısıtlıyor
@@ -20,13 +20,12 @@ const limiter = rateLimit({
         resetExpiryOnChange: true,
         expiry: 30,
         sendCommand: function (cmd, args) {
-            console.log('Command:', cmd);  // cmd değerini logla
+            //console.log('Command:', cmd);  // cmd değerini logla
             const validCommands = ['get', 'set', 'hmset','SCRIPT'
              /* Diğer geçerli komutlar buraya eklenebilir */];
 
             return new Promise((resolve, reject) => {
                 if (!validCommands.includes(cmd)) {
-                    console.log('---------+')
                     redis[cmd](...args, (err, reply) => {
                         if (err) {
                             reject(err);
