@@ -1,13 +1,13 @@
 import Boom from "@hapi/boom";
 import redis from "../config/redis.js";
-import Validation from './Validations.js';
+import Validations from './Validations.js';
 import helpers from '../helpers/jwt.js';
 import User from '../models/User.js';
 
 const register = async (req, res, next) => {
     const input = req.body;
 
-    const { error } = Validation.authSchema.validate(input);
+    const { error } = Validations.authSchema.validate(input);
     if (error) return next(Boom.badRequest(error.details[0].message));
 
     try {
@@ -42,7 +42,7 @@ const register = async (req, res, next) => {
 const login = async (req, res, next) => {
     const input = req.body;
 
-    const { error } = Validation.authSchema.validate(input);
+    const { error } = Validations.authSchema.validate(input);
     if (error) return next(Boom.badRequest(error.details[0].message));
 
     try {
