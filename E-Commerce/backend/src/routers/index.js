@@ -15,3 +15,4 @@ router.use('/auth', Auth);
 router.use('/product', Product);
 router.use('/order', helpers.verifyAccessToken, Order);
 
+export default router;

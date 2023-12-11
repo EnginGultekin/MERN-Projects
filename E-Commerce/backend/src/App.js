@@ -3,16 +3,17 @@ import './config/db.js';
 import express from 'express';
 import Boom from '@hapi/boom';
 import cors from 'cors';
-import limiter from './middlewares/rate-limiter.js';
+import router from './routers/index.js';
+//import limiter from './middlewares/rate-limiter.js';
 
 const app = express();
 
 app.use(cors());
-app.use(limiter)
+//app.use(limiter)
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-// app.use(router)
+app.use(router)
 
 // Yukarda gittiği yerde router'ı bulamazsa buraya girecek
 app.use((req, res, next) => {

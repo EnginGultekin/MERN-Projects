@@ -1,6 +1,6 @@
 import JWT from 'jsonwebtoken';
 import Boom from '@hapi/boom';
-import redis from '../config/redis';
+import redis from '../config/redis.js';
 
 
 const signAccessToken = (data) => {
@@ -14,7 +14,7 @@ const signAccessToken = (data) => {
             issuer: "ecommerce.app",
         };
 
-        JWT.sign(payload, process.env.ACCESS_TOKEN_SECRET, (err, payload) => {
+        JWT.sign(payload, process.env.ACCESS_TOKEN_SECRET, (err, token) => {
             if (err) {
                 console.log(err);
                 reject(Boom.internal())
@@ -30,8 +30,9 @@ const verifyAccessToken = (req, res, next) => {
     if (!authorizationToken) {
         next(Boom.unauthorized());
     }
-
-    JWT.verify(authorizationToken, process.env.ACCESS_TOKEN_SECRET, (err, payload) => {
+    // Bearer to remove
+    const autToken = authorizationToken.split(' ')[1]
+    JWT.verify(autToken, process.env.ACCESS_TOKEN_SECRET, (err, payload) => {
         if (err) {
             return next(
                 Boom.unauthorized(

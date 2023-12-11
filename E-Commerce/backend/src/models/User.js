@@ -24,11 +24,11 @@ const userSchema = mongoose.Schema(
 );
 
 
-userSchema.pre("save", async (next) => {
+userSchema.pre("save", async function (next) {
     try {
         if (this.isNew) {
             const salt = await bcrypt.genSalt(10);
-            const hashed = await bcrypt.hash(this.password, salt);
+            const hashed = bcrypt.hash(this.password, salt);
             this.password = hashed;
         }
 
@@ -38,7 +38,7 @@ userSchema.pre("save", async (next) => {
     }
 });
 
-userSchema.methods.isValidPass = async (pass) => {
+userSchema.methods.isValidPass = async function (pass) {
     return await bcrypt.compare(pass, this.password);
 }
 
