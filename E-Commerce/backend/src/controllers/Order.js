@@ -5,7 +5,7 @@ import Validations from "./Validations.js";
 
 const create = async (req, res, next) => {
     const input = req.body;
-    input.items = input.items ? JSON.parse(input.items) : null;
+    //input.items = input.items ? JSON.parse(input.items) : null;
 
     const { error } = Validations.orderSchema.validate(input);
     if (error) return next(Boom.badRequest(error.details[0].message));
@@ -29,8 +29,8 @@ const create = async (req, res, next) => {
 const list = async (req, res, next) => {
     try {
         const orders = await Order.find({})
-            .populate('user', '-password -__v')
-            .populate('items');
+            // .populate('User', '-password -__v')
+            // .populate('items');
 
         res.json(orders);
     } catch (error) {
@@ -42,7 +42,7 @@ const getMyOrders = async (req, res, next) => {
     const { user_id } = req.payload;
 
     try {
-        const orders = await Order.findById(user_id).populate('purchases.item');
+        const orders = await Order.find({user:user_id}) /*.populate('purchases.item')*/;
 
         res.json(orders);
     } catch (error) {

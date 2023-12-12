@@ -10,7 +10,15 @@ const orderSchema = Joi.object({
     items: Joi.array().items(Joi.string()).required(),
 });
 
+const productSchema = Joi.object({
+    title: Joi.string().required(),
+    description: Joi.string().min(3),
+    price: Joi.number().required(),
+    photos: Joi.array(),
+  });
+
 export default {
     authSchema,
     orderSchema,
+    productSchema,
 }

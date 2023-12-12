@@ -3,16 +3,16 @@ import mongoose, { Schema } from "mongoose";
 const orderSchema = mongoose.Schema({
     user: {
         type: Schema.Types.ObjectId,
-        ref: 'user',
+        ref: 'User',
     },
-    adress: {
+    address: {
         type: String,
         required: true,
     },
     items: [
         {
             type: Schema.Types.ObjectId,
-            ref: 'product',
+            ref: 'Product',
         },
     ],
     createAt: {
