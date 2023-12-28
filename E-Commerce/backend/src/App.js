@@ -1,5 +1,6 @@
 import 'dotenv/config';
 import './config/db.js';
+import bodyParser from 'body-parser';
 import express from 'express';
 import Boom from '@hapi/boom';
 import cors from 'cors';
@@ -11,7 +12,7 @@ const app = express();
 app.use(cors());
 //app.use(limiter)
 app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
+app.use(bodyParser.urlencoded({ extended: false }))
 
 app.use(router)
 
