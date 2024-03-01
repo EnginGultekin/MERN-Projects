@@ -2,14 +2,14 @@
   padding: 15px;
 }
 
+.loading-spinner-container {
+  display: flex;
+  margin: 18% auto;
+  justify-content: center;
+}
+
 .loading-spinner {
   width: 100px;
   height: 100px;
-  border: 15px solid #d7e3fa;
-  border-top: 15px solid #415da1;
   border-radius: 50%;
-  display: flex;
-  margin: 23% auto;
-  justify-content: center;
-  animation: spinner 1.0s linear infinite;
 }

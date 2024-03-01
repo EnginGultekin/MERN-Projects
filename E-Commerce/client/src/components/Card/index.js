@@ -5,9 +5,8 @@ import { Link } from "react-router-dom";
 function Card({ item }) {
     return (
         <Box borderWidth='1px' borderRadius='lg' overflow='hidden' p="3">
-            <Link to='#/'>
+            <Link to={`/product/${item._id}`}>
                 <Image borderRadius='lg' src={item.photos[0]} alt='product' loading="lazy" />
-
                 <Box p="6">
                     <Box d="plex" alignItems="baseline">
                         {moment(item.creatAt).format("DD/MM/YYYY")}

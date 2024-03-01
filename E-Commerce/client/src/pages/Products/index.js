@@ -16,8 +16,8 @@ function Products() {
         <div>
             <Grid templateColumns='repeat(3, 1fr)' gap={4}>
                 {data.map((item, key) => (
-                    <Card key={key} item={item}/>
-                ))}
+                    <Card key={key} item={item} />
+                ))} 
             </Grid>
 
         </div>
