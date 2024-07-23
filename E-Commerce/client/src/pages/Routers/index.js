@@ -15,8 +15,8 @@ function Routers() {
             <Routes>
                 <Route path='/' element={<Products home={true} />} />
                 <Route path='/product/:product_id' element={< ProductDetails />} />
-                <Route path='/signin' element={< Signup />} />
-                <Route path='/signup' element={<Signin />} />
+                <Route path='/signin' element={< Signin />} />
+                <Route path='/signup' element={<Signup />} />
                 <Route path='*' element={<Page404 />} />
             </Routes>
             </div>
