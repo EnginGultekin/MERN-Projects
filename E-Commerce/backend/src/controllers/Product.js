@@ -67,7 +67,7 @@ const deleteProduct = async (req, res, next) => {
 
 }
 
-const limit = 12;
+const limit = 6;
 const getList = async (req, res, next) => {
     let { page } = req.query;
 
