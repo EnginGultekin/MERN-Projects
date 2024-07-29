@@ -14,7 +14,7 @@ const signAccessToken = (data) => {
             issuer: "ecommerce.app",
         };
 
-        JWT.sign(payload, process.env.ACCESS_TOKEN_SECRET, (err, token) => {
+        JWT.sign(payload, process.env.ACCESS_TOKEN_SECRET, option, (err, token) => {
             if (err) {
                 console.log(err);
                 reject(Boom.internal())
@@ -40,7 +40,6 @@ const verifyAccessToken = (req, res, next) => {
                 )
             );
         }
-
         req.payload = payload;
         next();
     });
@@ -63,7 +62,6 @@ const signRefreshToken = (user_id) => {
             }
 
             redis.set(user_id, token, "EX", 180 * 24 * 60 * 60);
-
             resolve(token);
         });
     });

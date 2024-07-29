@@ -3,6 +3,7 @@ import redis from "../config/redis.js";
 import Validations from './Validations.js';
 import helpers from '../helpers/jwt.js';
 import User from '../models/User.js';
+import bcrypt from 'bcrypt';
 
 const register = async (req, res, next) => {
     const input = req.body;
@@ -12,7 +13,12 @@ const register = async (req, res, next) => {
 
     try {
         const isExists = await User.findOne({ email: input.email });
-        if (isExists) return next(Boom.conflict('This e-mail already using.'))
+        if (isExists) return next(Boom.conflict('This e-mail already using.'));
+
+        const isPass = bcrypt.compare(input.password, input.confirmPassword);
+        if (!isPass) return next(Boom.badRequest('Password and confirm password are not the same'));
+
+        delete input.confirmPassword;  // We don't use
 
         const user = new User(input);
         const data = await user.save();
