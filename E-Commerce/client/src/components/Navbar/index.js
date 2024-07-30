@@ -6,7 +6,13 @@ import { useAuth } from '../../context/AuthContext';
 
 function Navbar() {
 
-    const { loggedIn } = useAuth();
+    const { loggedIn, logout } = useAuth();
+
+    const handleClick = ({ history }) => {
+        logout(() => {
+            history.pushState('/');
+        })
+    }
 
     return (
         <nav className='nav'>
@@ -23,9 +29,18 @@ function Navbar() {
             <div className='rigth'>
                 {loggedIn
                     ?
-                    <Link to='/profile'>
-                        <Button >Profile</Button>
-                    </Link>
+                    <>
+                        <Link to='/profile'>
+                            <Button >Profile</Button>
+                        </Link>
+                        <Link to='/'>
+                            <Button
+                                colorScheme='pink'
+                                variant='solid'
+                                onClick={handleClick}>Logout
+                            </Button>
+                        </Link>
+                    </>
                     :
                     <>
                         <Link to='/signin'>
