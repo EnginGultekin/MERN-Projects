@@ -10,7 +10,7 @@ function Navbar() {
 
     const handleClick = ({ history }) => {
         logout(() => {
-            history.pushState('/');
+            history('/');
         })
     }
 
