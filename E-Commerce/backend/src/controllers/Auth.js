@@ -9,16 +9,11 @@ const register = async (req, res, next) => {
     const input = req.body;
 
     const { error } = Validations.authSchema.validate(input);
+    
     if (error) return next(Boom.badRequest(error.details[0].message));
-
     try {
         const isExists = await User.findOne({ email: input.email });
         if (isExists) return next(Boom.conflict('This e-mail already using.'));
-
-        const isPass = bcrypt.compare(input.password, input.confirmPassword);
-        if (!isPass) return next(Boom.badRequest('Password and confirm password are not the same'));
-
-        delete input.confirmPassword;  // We don't use
 
         const user = new User(input);
         const data = await user.save();
@@ -110,7 +105,7 @@ const logout = async (req, res, next) => {
         res.json({ message: 'Succuess' })
     } catch (error) {
         return next(error)
-    } 
+    }
 }
 
 const isMe = async (req, res, next) => {
