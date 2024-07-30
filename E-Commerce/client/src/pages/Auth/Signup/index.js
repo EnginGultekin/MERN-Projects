@@ -7,7 +7,7 @@ import { useAuth } from '../../../context/AuthContext';
 function Signup() {
   const { login } = useAuth();
 
-  const { handleSubmit, handleChange, handleBlur, handleReset, values, errors } = useFormik({
+  const { handleSubmit, handleChange, values, errors } = useFormik({
 
     initialValues: {
       email: '',
