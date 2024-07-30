@@ -110,13 +110,11 @@ const logout = async (req, res, next) => {
         res.json({ message: 'Succuess' })
     } catch (error) {
         return next(error)
-    }
+    } 
 }
 
 const isMe = async (req, res, next) => {
     const { user_id } = req.payload;
-    console.log(req.payload)
-
     try {
         const user = await User.findById(user_id).select("-password -__v");
 

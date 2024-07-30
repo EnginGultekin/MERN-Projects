@@ -6,6 +6,7 @@ import Navbar from '../../components/Navbar/index.js'
 import Page404 from '../404.js';
 import Products from '../Products/index.js';
 import ProductDetails from '../Product_Details/index.js';
+import Profile from '../Profile/index.js';
 
 function Routers() {
     return (
@@ -17,6 +18,7 @@ function Routers() {
                 <Route path='/product/:product_id' element={< ProductDetails />} />
                 <Route path='/signin' element={< Signin />} />
                 <Route path='/signup' element={<Signup />} />
+                <Route path='/profile' element={<Profile />} />
                 <Route path='*' element={<Page404 />} />
             </Routes>
             </div>

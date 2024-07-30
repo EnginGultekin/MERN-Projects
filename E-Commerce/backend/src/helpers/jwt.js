@@ -30,9 +30,9 @@ const verifyAccessToken = (req, res, next) => {
     if (!authorizationToken) {
         next(Boom.unauthorized());
     }
-    // Bearer to remove
-    const autToken = authorizationToken.split(' ')[1]
-    JWT.verify(autToken, process.env.ACCESS_TOKEN_SECRET, (err, payload) => {
+    // isExist Bearer to remove
+    //const autToken = authorizationToken.split(' ')[1]
+    JWT.verify(authorizationToken, process.env.ACCESS_TOKEN_SECRET, (err, payload) => {
         if (err) {
             return next(
                 Boom.unauthorized(
