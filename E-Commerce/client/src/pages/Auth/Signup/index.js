@@ -10,7 +10,6 @@ function Signup() {
   const history = useNavigate();
 
   const { handleSubmit, handleChange, values, errors } = useFormik({
-
     initialValues: {
       email: '',
       password: '',

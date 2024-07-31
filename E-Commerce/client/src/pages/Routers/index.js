@@ -8,6 +8,8 @@ import Products from '../Products/index.js';
 import ProductDetails from '../Product_Details/index.js';
 import ProtectedProfileRoute from './ProtectedProfileRoute.js';
 
+
+
 function Routers() {
     return (
         <>
