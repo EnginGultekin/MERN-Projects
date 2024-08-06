@@ -69,7 +69,7 @@ function Signup() {
                   isInvalid={errors.confirmPassword} />
               </FormControl>
 
-              <Button mt='4' width type='submit'>Sign Up</Button>
+              <Button mt='4' width='full' type='submit'>Sign Up</Button>
             </form>
           </Box>
         </Box>
