@@ -5,11 +5,12 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { BrowserRouter } from 'react-router-dom';
 import { ChakraProvider } from '@chakra-ui/react'
-import { QueryClient, QueryClientProvider } from 'react-query'
-import { ReactQueryDevtools } from 'react-query/devtools'
+import { QueryClient, QueryClientProvider } from 'react-query';
+import { ReactQueryDevtools } from 'react-query/devtools';
 
 // Contexes
 import { AuthProvider } from './context/AuthContext';
+import { BasketProvider } from './context/BasketContext';
 
 const queryClient = new QueryClient(
   {
@@ -28,7 +29,9 @@ root.render(
       <ChakraProvider>
         <BrowserRouter>
           <AuthProvider>
-            <App />
+            <BasketProvider>
+              <App />
+            </BasketProvider>
           </AuthProvider>
         </BrowserRouter>
       </ChakraProvider>

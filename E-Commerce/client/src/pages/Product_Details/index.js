@@ -6,8 +6,11 @@ import { useParams } from 'react-router-dom';
 import { Box, Button, Center, Grid, GridItem, Text } from '@chakra-ui/react';
 import moment from 'moment';
 import ImageGallery from 'react-image-gallery';
+import { useBasket } from '../../context/BasketContext';
 
 function ProductDetails() {
+
+  const { addToBasket, items } = useBasket();
 
   const { product_id } = useParams();
   const { isLoading, error, data } = useQuery(["products", product_id], () => fetchProduct(product_id));
@@ -18,6 +21,9 @@ function ProductDetails() {
 
   const images = data.photos.map((url) => ({ original: url, thumbnail: url }))
 
+  // Sadece bu sayfadaki ürün var mı yok mu 
+  const findBasketItem = items.find((item) => item._id === product_id);
+
   return (
     <div>
       <Box w='100%' p={4}>
@@ -25,8 +31,12 @@ function ProductDetails() {
           templateColumns='repeat(12, 1fr)'>
 
           <GridItem colSpan={1} >
-            <Button colorScheme='pink'>Add to Basket</Button>
-            <Text style={{margin:'20px'}}>{moment(data.createdAt).format("DD/MM/YYYY")}</Text>
+            <Button colorScheme={findBasketItem ? 'pink' : 'green'} onClick={() => addToBasket(data, findBasketItem)}>
+              {
+                findBasketItem ? 'Remove to Basket' : 'Add to Basket'
+              }
+            </Button>
+            <Text style={{ margin: '20px' }}>{moment(data.createdAt).format("DD/MM/YYYY")}</Text>
           </GridItem>
           <GridItem colStart={3} colEnd={8}>
             <Center>
@@ -54,7 +64,7 @@ function ProductDetails() {
               {data.description}
             </Text>
           </GridItem>
-        
+
         </Grid>
 
       </Box>
