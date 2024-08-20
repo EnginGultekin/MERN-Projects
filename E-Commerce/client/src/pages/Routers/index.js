@@ -7,6 +7,7 @@ import Page404 from '../404.js';
 import Products from '../Products/index.js';
 import ProductDetails from '../Product_Details/index.js';
 import ProtectedProfileRoute from './ProtectedProfileRoute.js';
+import Basket from '../Basket/index.js';
 
 
 
@@ -21,6 +22,7 @@ function Routers() {
                 <Route path='/signin' element={< Signin />} />
                 <Route path='/signup' element={<Signup />} />
                 <Route path='/profile' element={<ProtectedProfileRoute />} />
+                <Route path='/basket' element={<Basket />} />
                 <Route path='*' element={<Page404 />} />
             </Routes>
             </div>
