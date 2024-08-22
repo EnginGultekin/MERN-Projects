@@ -53,3 +53,10 @@ export const fetchLogout = async () => {
 
     return data;
 }
+
+// Böle olunca statusCode dönüyor ama öbür şekil gelmiyor
+// Çünkü öbür şekil sadece içinden datayı alıyorduk
+export const postOrder = async (input) => {
+    const data = await axios.post(`${baseURL}/order`, input);
+    return data;
+} 

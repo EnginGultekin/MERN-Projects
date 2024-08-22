@@ -20,7 +20,7 @@ const create = async (req, res, next) => {
 
         const savedData = await order.save();
 
-        res.json({ order: savedData });
+        res.status(201).json({message: 'Order created', order: savedData });
     } catch (error) {
         next(error);
     }

@@ -3,7 +3,7 @@ import { createContext, useContext, useEffect, useState } from 'react';
 const BasketContext = createContext();
 
 
-const defaultBasket = JSON.parse(localStorage.getItem('basket'))  || [];
+const defaultBasket = JSON.parse(localStorage.getItem('basket')) || [];
 
 
 const BasketProvider = ({ children }) => {
@@ -30,11 +30,14 @@ const BasketProvider = ({ children }) => {
         setItems(filtered);
     }
 
+    const emptyBasket = () => setItems([]);
+
     const values = {
         items,
         setItems,
         addToBasket,
         removefromBasket,
+        emptyBasket,
     };
 
     return <BasketContext.Provider value={values}>{children}</BasketContext.Provider>;
