@@ -5,6 +5,7 @@ import Profile from '../Profile';
 function ProtectedProfileRoute() {
 
     const { loggedIn } = useAuth();
+
     if (!loggedIn) {
         return <Navigate to="/" />
     }
