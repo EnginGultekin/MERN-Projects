@@ -20,7 +20,7 @@ const create = async (req, res, next) => {
 
         const savedData = await order.save();
 
-        res.status(201).json({message: 'Order created', order: savedData });
+        res.status(201).json({ message: 'Order created', order: savedData });
     } catch (error) {
         next(error);
     }
@@ -28,10 +28,8 @@ const create = async (req, res, next) => {
 
 const list = async (req, res, next) => {
     try {
-        const orders = await Order.find({})
-            // .populate('User', '-password -__v')
-            // .populate('items');
-
+        const orders = await Order.find({}).populate('user', '-password -__v').populate('items');
+        console.log(orders)
         res.json(orders);
     } catch (error) {
         next(error);
@@ -42,7 +40,7 @@ const getMyOrders = async (req, res, next) => {
     const { user_id } = req.payload;
 
     try {
-        const orders = await Order.find({user:user_id}) /*.populate('purchases.item')*/;
+        const orders = await Order.find({ user: user_id }) /*.populate('purchases.item')*/;
 
         res.json(orders);
     } catch (error) {
