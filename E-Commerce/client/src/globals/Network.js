@@ -61,9 +61,13 @@ export const postOrder = async (input) => {
     return data;
 }
 
-
 export const fetchOrders = async () => {
     const data = await axios.get(`${baseURL}/order`);
     return data;
 }
 
+
+export const deleteProduct = async (product_id) => {
+    const data = await axios.delete(`${baseURL}/product/${product_id}`);
+    return data;
+}

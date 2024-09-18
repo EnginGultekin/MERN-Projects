@@ -1,4 +1,3 @@
-import User from "../models/User.js";
 import Order from "../models/Order.js";
 import Boom from "@hapi/boom";
 import Validations from "./Validations.js";
@@ -29,7 +28,6 @@ const create = async (req, res, next) => {
 const list = async (req, res, next) => {
     try {
         const orders = await Order.find({}).populate('user', '-password -__v').populate('items');
-        console.log(orders)
         res.json(orders);
     } catch (error) {
         next(error);

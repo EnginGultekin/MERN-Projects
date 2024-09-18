@@ -24,8 +24,8 @@ app.use((req, res, next) => {
 
 // Server hatası olduğunda buraya gelecek 
 app.use((err, req, res, next) => {
-    console.log(err);
     if (err) {
+        console.log(err);
         if (err.output) {
             return res.status(err.output.statusCode || 500).json(err.output.payload);
         }
