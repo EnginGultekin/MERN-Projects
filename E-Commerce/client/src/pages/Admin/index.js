@@ -1,10 +1,11 @@
 import React from 'react'
 import './style.css'
-import { Link, Route, Routes,} from 'react-router-dom'
+import { Link, Route, Routes, } from 'react-router-dom'
 import { Box } from '@chakra-ui/react'
 import Home from './Home';
 import Products from './Products';
 import Orders from './Orders';
+import ProductDetail from './Products/ProductDetail';
 
 
 function Admin() {
@@ -36,6 +37,7 @@ function Admin() {
                     <Route path="/" element={<Home home={true} />} />
                     <Route path="/orders" element={<Orders />} />
                     <Route path="/products" element={<Products />} />
+                    <Route path="/products/:product_id" element={<ProductDetail />} />
                 </Routes>
             </Box>
         </div>

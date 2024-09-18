@@ -85,7 +85,7 @@ function Products() {
       key: 'action',
       render: (_, record) => (
         <Space size="middle">
-          <Link to={`/admin/products/${record._id}`}>Düzenle</Link>
+          <Link to={`/admin/products/${record._id}`}>Edit</Link>
           <Popconfirm
             title="Ürünü sil"
             description="Bu ürünü silmek istediğinize emin misiniz?"
@@ -94,7 +94,7 @@ function Products() {
             okText="Evet"
             cancelText="Hayır"
           >
-            <Button danger>Sil</Button>
+            <Button danger>Delete</Button>
           </Popconfirm>
         </Space>
       ),

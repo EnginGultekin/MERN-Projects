@@ -71,3 +71,9 @@ export const deleteProduct = async (product_id) => {
     const data = await axios.delete(`${baseURL}/product/${product_id}`);
     return data;
 }
+
+
+export const updateProduct = async (formData, product_id) => {
+    const data = await axios.put(`${baseURL}/product/${product_id}`, formData);
+    return data
+}
