@@ -1,22 +1,32 @@
-import { useQuery } from 'react-query';
-import { useParams } from 'react-router-dom';
-import { fetchProduct, updateProduct } from '../../../globals/Network';
+import { createProduct } from '../../../globals/Network';
 import { Box, Button, FormControl, FormLabel, Grid, GridItem, Input, Text, Textarea } from '@chakra-ui/react';
 import { FieldArray, Formik } from 'formik';
 import { message } from 'antd';
 import validations from './Validation.js';
+import { useMutation, useQueryClient } from 'react-query';
+import { useNavigate } from 'react-router-dom';
 
+function ProductAdd() {
 
+    const queryClient = useQueryClient();
+    const history = useNavigate();
 
-function ProductDetail() {
-    const { product_id } = useParams();
-    const { data, error, isError, isLoading } = useQuery(
-        ['admin-product', product_id],
-        () => fetchProduct(product_id),
-    );
-
-    if (isLoading) return <div>Loading...</div>;
-    if (isError) return <div>Error: {error.message}</div>;
+    const newProductMutation = useMutation(createProduct, {
+        onSuccess: (values) => {
+            // Silinen ürünün bulunduğu sayfanın verilerini yeniden yükle
+            queryClient.refetchQueries(['admin-products']);
+            message.success({
+                content: 'The product successfully Save',
+                key: 'product_save',
+                duration: 2,
+            })
+            history('/admin/products');
+        },
+        onError: () => {
+            message.error('Ürün eklenirken bir hata oluştu!');
+        },
+        // onSuccess: () => queryClient.invalidateQueries("admin-products")
+    });
 
 
     return (
@@ -25,24 +35,19 @@ function ProductDetail() {
             <Formik
                 enableReinitialize={true}
                 initialValues={{
-                    title: data.title,
-                    description: data.description,
-                    price: data.price,
-                    photos: data.photos, // Eğer data.photos yoksa boş array tanımlıyoruz
+                    title: '',
+                    description: '',
+                    price: '',
+                    photos: [], // Eğer data.photos yoksa boş array tanımlıyoruz
                 }}
                 validateOnChange={false}
-                validationSchema={validations.editValidations}
+                validationSchema={validations.newValidations}
                 onSubmit={async (values) => {
-                    message.loading({ content: 'Loading...', key: 'product_update' })
+                    message.loading({ content: 'Loading...', key: 'product_save' })
                     try {
-                        await updateProduct(values, product_id)
-                        message.success({
-                            content: 'The product successfully updated',
-                            key: 'product_update',
-                            duration: 2,
-                        })
+                        newProductMutation.mutate(values)
                     } catch (error) {
-                        message.error('The product does not updated!')
+                        message.error('The product does not save!')
                     }
                 }}
             >
@@ -55,10 +60,10 @@ function ProductDetail() {
                     touched,
                     errors
                 }) => (
-                    <Box my="5" textAlign="left" p="5">
+                    <Box my="2" textAlign="left" p="5">
                         <form onSubmit={handleSubmit}>
                             <Grid templateColumns="repeat(6, 1fr)" >
-                                <GridItem colSpan={3} mb='5'>
+                                <GridItem colSpan={3} mb='3'>
                                     <FormControl>
                                         <FormLabel>Title</FormLabel>
                                         <Input
@@ -74,7 +79,7 @@ function ProductDetail() {
                                         )}
                                     </FormControl>
                                 </GridItem>
-                                <GridItem colSpan={3} mb='5' ml="4">
+                                <GridItem colSpan={3} mb='3' ml="4">
                                     <FormControl>
                                         <FormLabel>Price</FormLabel>
                                         <Input
@@ -91,7 +96,7 @@ function ProductDetail() {
                                     </FormControl>
                                 </GridItem>
                                 <GridItem colSpan={6}>
-                                    <FormControl mt='5' mb='5'>
+                                    <FormControl mt='5' mb='3'>
                                         <FormLabel>Description</FormLabel>
                                         <Textarea
                                             name="description"
@@ -163,7 +168,7 @@ function ProductDetail() {
                                 width='full'
                                 isLoading={isSubmitting}
                             >
-                                Update Product
+                                Save Product
                             </Button>
                         </form>
                     </Box>
@@ -173,4 +178,4 @@ function ProductDetail() {
     );
 }
 
-export default ProductDetail;
+export default ProductAdd;

@@ -1,8 +1,8 @@
 import { useState } from 'react';
 import { useInfiniteQuery, useMutation, useQueryClient } from 'react-query';
 import { deleteProduct, fetchProductList } from '../../../globals/Network';
-import { Button, message, Pagination, Popconfirm, Space, Table } from 'antd';
-import { Text } from '@chakra-ui/react';
+import { Flex, message, Pagination, Popconfirm, Space, Table } from 'antd';
+import { Box, Button, Text } from '@chakra-ui/react';
 import { Link } from 'react-router-dom';
 
 function Products() {
@@ -94,7 +94,7 @@ function Products() {
             okText="Evet"
             cancelText="Hayır"
           >
-            <Button danger>Delete</Button>
+            <Button colorScheme='red' variant='outline'>Delete</Button>
           </Popconfirm>
         </Space>
       ),
@@ -120,23 +120,31 @@ function Products() {
 
   return (
     <div>
-      <Text fontSize='2xl' p='5'>Ürünler</Text>
 
-      <Table
-        dataSource={currentProducts}
-        columns={columns}
-        rowKey="_id"
-        pagination={false}
-      />
+      <Box p='5'>
+        <Flex justify='space-between'>
+          <Text fontSize='2xl' mb='3'>Products</Text>
+          <Link to='/admin/products/create'>
+          <Button colorScheme='green' variant='outline' mb='3'>Create new Product</Button>
+          </Link>
+        </Flex>
 
-      <Pagination
-        style={{ marginTop: '15px' }}
-        pageSize={6}
-        showSizeChanger={false}
-        current={current}
-        total={total}
-        onChange={onChange}
-      />
+        <Table
+          dataSource={currentProducts}
+          columns={columns}
+          rowKey="_id"
+          pagination={false}
+        />
+
+        <Pagination
+          style={{ marginTop: '15px' }}
+          pageSize={6}
+          showSizeChanger={false}
+          current={current}
+          total={total}
+          onChange={onChange}
+        />
+      </Box>
     </div>
   );
 }

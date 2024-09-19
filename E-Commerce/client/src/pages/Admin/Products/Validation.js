@@ -19,4 +19,24 @@ const editValidations = yup.object().shape({
     // )
 });
 
-export default editValidations;
+
+const newValidations = yup.object().shape({
+    title: yup
+        .string()
+        .required(),
+    description: yup
+        .string()
+        .min(5)
+        .required(),
+    price: yup
+        .number()
+        .required()
+        .positive(),
+    // photos: yup.array(
+    //     yup.string()
+    //         .url()
+    //         .nullable(),
+    // )
+});
+
+export default { editValidations, newValidations };

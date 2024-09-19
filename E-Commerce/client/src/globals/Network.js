@@ -77,3 +77,9 @@ export const updateProduct = async (formData, product_id) => {
     const data = await axios.put(`${baseURL}/product/${product_id}`, formData);
     return data
 }
+
+
+export const createProduct = async (formData) => {
+    const data = await axios.post(`${baseURL}/product/`, formData);
+    return data
+}

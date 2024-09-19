@@ -6,6 +6,7 @@ import Home from './Home';
 import Products from './Products';
 import Orders from './Orders';
 import ProductDetail from './Products/ProductDetail';
+import ProductAdd from './Products/ProductAdd';
 
 
 function Admin() {
@@ -38,6 +39,7 @@ function Admin() {
                     <Route path="/orders" element={<Orders />} />
                     <Route path="/products" element={<Products />} />
                     <Route path="/products/:product_id" element={<ProductDetail />} />
+                    <Route path="/products/create" element={<ProductAdd />} />
                 </Routes>
             </Box>
         </div>
